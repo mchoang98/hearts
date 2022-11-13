@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HeartShape</title>
+    <style>
+        /* turn off over flow */
+        body {
+            overflow: hidden;
+        }
+        body {
+            background-color: black;
+        }
+
+        .heart {
+            position: relative;
+            max-width: 100%;
+            max-height: 100%;
+            position: absolute;
+            top: 0;
+            color: white;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            padding: 20px;
+            animation:  transform 1s ease-in-out infinite alternate;
+        }
+        /* animation blink */
+        @keyframes transform{ 
+            0%{
+                transform: scale(1);
+            }
+            100%{
+                transform: scale(1.2);
+            }
+            
+        }
+        #heart_text{
+         /* center viewport */
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 50px;
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: bold;
+            text-align: center;
+            /* color animation gradient */
+            animation: color 1s infinite;
+
+           
+
+            
+        }
+
+      @keyframes color {
+            0% {
+                color: #ff0000;
+            }
+
+            25% {
+                color: #ff7f00;
+            }
+
+            50% {
+                color: #ffff00;
+            }
+
+            75% {
+                color: #00ff00;
+            }
+
+            100% {
+                color: #0000ff;
+            }
+        }
+        
+      
+
+        #circle_draw{
+            color: white;
+            position: relative;
+            width: 300px;
+            height: 300px;
+            position: absolute;
+            /* border circle */
+            border-radius: 50%;
+            /* border: 10px dotted white; */
+     
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            padding: 20px;
+            animation: transform 1s infinite;
+
+        }
+
+        /* animation transform */
+        @keyframes transform {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- import heart img -->
+
+    <div class="circle">
+        <!-- circle draw -->
+        <p id="circle_draw"></p>
+        <img style="display:none" class="heart" id="heart_img" src="heart.png" alt="heart">
+        <img style="display:none" class="heart" id="heart_shot" src="./heartshot.jpeg" alt="" srcset="">
+        <!-- I LOVE YOU -->
+        <p style="display:none" class="heart" id="heart_text">I LOVE YOU</p>
+    </div>
+
+
+
+
+</body>
+<script>
+    // get border of the heart img
+    // draw a circle
+    // show the heart img in the circle
+    function showContent(){
+    var heart_img = document.getElementById("heart_img");
+    var circle_draw = document.getElementById("circle_draw");
+    var heart_shot = document.getElementById("heart_shot");
+    var iloveyou = document.getElementById("heart_text");
+    circle_draw.innerHTML += "❤️";
+    // rotate the circle draw
+    for(var i = 0; i < 360; i++){
+       circle_draw.animate([
+           // keyframes
+           { transform: 'rotate(0deg)' },
+           { transform: 'rotate(360deg)' }
+       ], {
+           // timing options
+           duration: 3000,
+           iterations: Infinity
+       });
+       
+    }
+
+    // hide circle draw after 3s
+    setTimeout(function(){
+        circle_draw.style.display = "none";
+    }, 3000);
+
+    // show heart img after 3s
+    setTimeout(function(){
+        heart_img.style.display = "block";
+    }, 3000);
+
+    // hide heart img after 6s
+    setTimeout(function(){
+        heart_img.style.display = "none";
+    }, 6000);
+
+    // show heart shot after 6s
+    setTimeout(function(){
+        heart_shot.style.display = "block";
+    }, 6000);
+
+    // hide heart shot after 9s
+    setTimeout(function(){
+        heart_shot.style.display = "none";
+    }, 9000);
+
+    // show I LOVE YOU after 9s
+    setTimeout(function(){
+        iloveyou.style.display = "block";
+        heart_img.style.display = "block";
+        // cancel animation
+    }, 9000);
+
+    }
+
+    // call function showContent repeatly
+    showContent();
+    setTimeout(showContent,12000);
+
+
+</script>
+
+</html>
